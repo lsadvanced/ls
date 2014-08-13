@@ -27,6 +27,3 @@ class res_partner(osv.osv):
     _columns = {
 		'department': fields.char('Department', size=32),
 	}
-
-		
-
