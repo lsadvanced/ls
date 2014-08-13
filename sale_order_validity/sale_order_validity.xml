@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<openerp>
+     <data>
+        <record model="ir.ui.view" id="view_order_form_ovalidity">
+            <field name="name">sale.order.form.ovalidity</field>
+        	<field name="model">sale.order</field>
+        	<field name="inherit_id" ref="sale.view_order_form"/>
+        	<field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="mode_validity" string="Scadenza offerta" on_change="on_change_date_type(mode_validity, date_order)" attrs="{'required':[('mode_validity','!=', False)]}"/> 
+                    <field name="date_validity" string="Data scadenza" attrs="{'invisible':[('mode_validity','!=', False)],'required':[('mode_validity','=', False)]}" />
+                </xpath>
+            </field>
+		</record>
+		
+        <record model="ir.ui.view" id="view_order_form_ovalidity">
+            <field name="name">sale.order.form.ovalidity</field>
+        	<field name="model">sale.order</field>
+        	<field name="inherit_id" ref="sale.view_order_form"/>
+        	<field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="mode_validity" string="Scadenza offerta" on_change="on_change_date_type(mode_validity, date_order)" attrs="{'required':[('mode_validity','!=', False)]}"/> 
+                    <field name="date_validity" string="Data scadenza" attrs="{'invisible':[('mode_validity','!=', False)],'required':[('mode_validity','=', False)]}" />
+                    <field name="order_expired" string="Scaduto"/>
+                </xpath>
+            </field>
+		</record>
+		
+		<record id="view_quotation_tree_ovalidity" model="ir.ui.view">
+            <field name="name">sale.quotation.tree.ovalidity</field>
+            <field name="model">sale.order</field>
+            <field name="priority">16</field>
+        	<field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="order_expired" invisible="1" />
+                </xpath>
+		        <xpath expr="//tree[@string='Quotation']" position="attributes">
+                    <attribute name="colors">{"grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except'); orange:order_expired==True"}</attribute>
+                </xpath>
+            </field>
+        </record>	
+    </data>
+</openerp>
