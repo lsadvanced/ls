@@ -18,5 +18,3 @@ msgstr ""
 #: field:res.partner,department:0
 msgid "Department"
 msgstr ""
-
-
