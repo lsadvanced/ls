@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+		<record model="ir.ui.view" id="view_task_form2_priority">
+			<field name="name">view_task_form2_priority</field>
+        	<field name="model">project.task</field>
+        	<field name="inherit_id" ref="project.view_task_form2"/>
+        	<field name="arch" type="xml">
+	            <xpath expr="/form/sheet/group/group/field[@name='project_id']" position="after">
+	            	<field name="comp_priority" invisible="1"/>
+	                <field name="urgency" required="1" on_change="project_task_onchange(urgency, importance)"/>
+	                <field name="importance" required="1" on_change="project_task_onchange(urgency, importance)"/>
+	                <field name="difficulty" required="1"/>
+
+	            </xpath>        
+			</field>
+		</record>	
+		<record model="ir.ui.view" id="view_task_tree2_priority">
+			<field name="name">view_task_tree2_priority</field>
+        	<field name="model">project.task</field>
+        	<field name="inherit_id" ref="project.view_task_tree2"/>
+        	<field name="arch" type="xml">
+	            <xpath expr="//field[@name='name']" position="after">
+	            	<field name="categ_ids" string="Categoria" widget="many2many_tags" context="{'object_name': 'crm.lead'}"/>            
+	                <field name="comp_priority"/>
+	                <field name="difficulty"/>
+	            </xpath>        	                   
+			</field>
+		</record>		
+    </data>
+</openerp>
+
